@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Js</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+            background-color: #f4f5f7;
+            overflow-x: hidden;
+        }
+
+        .body.row {
+            padding: 10px;
+        }
+
+        .myChart {
+            border: 1px solid #3333330f;
+            margin-top: 50px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px #333;
+            height: 450px;
+        }
+
+        .header {
+            --bs-gutter-x: 0rem;
+            --bs-gutter-y: 0;
+            z-index: 10;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .title {
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .font {
+            text-align: right;
+            font-size: 10px;
+        }
+
+        button {
+            display: inline-block;
+            border: none;
+            background-color: transparent;
+        }
+
+        header#topHeader {
+            background-color: #fff;
+            box-shadow: 0 0 8px #000000a6;
+        }
+
+        .headIcons {
+            padding: 10px;
+            border-bottom: 1px solid #00000021
+        }
+
+        .span-brand {
+            color: #15a3be;
+            font-size: 25px;
+        }
+
+        .span-bar {
+            color: #00000054;
+            font-size: 19px;
+            padding-right: 5px;
+        }
+
+        .dash {
+            margin: 10px;
+            border-bottom: 1px solid #00000021
+        }
+
+        .mycol3 {
+            font-size: 25px;
+            font-weight: 700;
+            padding-left: 10px;
+        }
+
+        .btn:first-child {
+            background-color: #ecedf4;
+            font-weight: 600;
+        }
+
+        .btn:last-child {
+            background-color: #15a3be;
+            color: white;
+        }
+
+        .mycol9 {
+            text-align: right;
+            padding-bottom: 10px;
+        }
+
+        .text-end i {
+            color: #00000054;
+            display: inline-block;
+            padding-right: 5px;
+        }
+
+        @media(min-width:1200px) {
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+        }
+
+        @media(min-width:768px) {
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="topHeader">
+        <div class="headIcons">
+            <span class="span-bar"><i class="fas fa-bars"></i></span>
+            <span class="span-brand"><i class="fab fa-asymmetrik">adjust</i></span>
+        </div>
+        <div class="dash">
+            <div class="row">
+                <div class="col-3 mycol3">
+                    <h3> Dashboard</h3>
+                </div>
+                <div class="col-9 mycol9">
+                    <button class="btn">View data sets</button>
+                    <button class="btn">New widget</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-end px-4 py-2"><i class="fas fa-share-alt"></i>Share</div>
+    </header>
+    <div class="container">
+        <div class="body row">
+            <!-- Azhar -->
+            <div class="azhar col-md-4">
+                <div class="myChart">
+                    <header class="row header">
+                        <div class="col title">[Last 30 Days] Organic vs. Non-orgainic installs</div>
+                        <div class="col-3 font">
+                            <button class=""><i class="far fa-clone"></i></button>
+                            <button class=""><i class="far fa-edit"></i></button>
+                            <button class=""><i class="fas fa-download"></i></button>
+                            <button class=""><i class="far fa-trash-alt"></i></button>
+                        </div>
+                    </header>
+                    <!-- <h3></h3> -->
+
+                    <div id="barchartContainer4" style="height: 350px; width: 100%;"></div>
+                </div>
+            </div>
+            <!-- fardeen -->
+            <div class="fardeen col-md-4">
+                <div class="myChart">
+                    <header class="row header">
+                        <div class="col title">[Last 30 Days]Non-Organic Installs by App</div>
+                        <div class="col-3 font">
+                            <button class=""><i class="far fa-clone"></i></button>
+                            <button class=""><i class="far fa-edit"></i></button>
+                            <button class=""><i class="fas fa-download"></i></button>
+                            <button class=""><i class="far fa-trash-alt"></i></button>
+                        </div>
+                    </header>
+                    <!-- <h3></h3> -->
+
+                    <div id="linechartContainer3" style="height: 350px; width: 100%;"></div>
+                </div>
+            </div>
+            <!-- jassir -->
+            <div class="jassir col-md-4">
+                <div class="myChart">
+                    <header class="row header">
+                        <div class="col title">[Last 30 Days] Top 5 India Channels With Highest CR</div>
+                        <div class="col-3 font">
+                            <button class=""><i class="far fa-clone"></i></button>
+                            <button class=""><i class="far fa-edit"></i></button>
+                            <button class=""><i class="fas fa-download"></i></button>
+                            <button class=""><i class="far fa-trash-alt"></i></button>
+                        </div>
+                    </header>
+                    <div id="chartContainer" style="height: 350px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- safwan -->
+        <div class="safwan  col-12">
+            <div class="container">
+                <div class="row" style="justify-content: center;">
+                    <div class="myChart col-md-5 align  mx-md-3 ">
+                        <header class="row header">
+                            <div class="col title">[Last 30 Days | Deliverables] Installs vs. Reinstalls Ratio</div>
+                            <div class="col-3 font">
+                                <button class=""><i class="far fa-clone"></i></button>
+                                <button class=""><i class="far fa-edit"></i></button>
+                                <button class=""><i class="fas fa-download"></i></button>
+                                <button class=""><i class="far fa-trash-alt"></i></button>
+                            </div>
+                        </header>
+                        <div id="piechartContainer1" style="height: 350px; width: 100%;"></div>
+                    </div>
+                    <div class="myChart col-md-5 align  mx-md-3 ">
+                        <header class="row header">
+                            <div class="col title">[Last 30 Days | SKAdnetwork] Installs vs. Reinstalls Ratio</div>
+                            <div class="col-3 font">
+                                <button class=""><i class="far fa-clone"></i></button>
+                                <button class=""><i class="far fa-edit"></i></button>
+                                <button class=""><i class="fas fa-download"></i></button>
+                                <button class=""><i class="far fa-trash-alt"></i></button>
+                            </div>
+                        </header>
+                        <div id="piechartContainer2" style="height: 350px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script>
+        window.onload = function () {
+
+            var options2 = {
+
+                axisY: {
+                    valueFormatString: "##k",
+                },
+                toolTip: {
+                    borderThickness: 0,
+                    cornerRadius: 3,
+                },
+                legend: {
+                    fontSize: 15,
+                    borderColor: "#333",
+                },
+                data: [{
+                    // Change type to "doughnut", "line", "splineArea", etc.
+                    legendMarkerType: "circle",
+                    type: "column",
+                    color: "#a46fff",
+                    width: 320,
+                    backgroundColor: "#333",
+                    borderColor: "#333",
+                    name: "Non-Organic Installs",
+                    showInLegend: true,
+                    valueFormatString: "##k",
+
+                    dataPoints: [{
+                            label: "NETWORK 1",
+                            y: 35
+                        },
+                        {
+                            label: " ",
+                            y: 20
+                        },
+                        {
+                            label: "NETWORK 2",
+                            y: 15
+                        },
+                        {
+                            label: " ",
+                            y: 10
+                        },
+                        {
+                            label: "NETWORK 3",
+                            y: 5
+                        }
+                    ]
+                }]
+            };
+            var options = {
+
+                legend: {
+                    horizontalAlign: "right",
+                    verticalAlign: "top",
+                    maxWidth: 110,
+                    fontSize: 18,
+                    fontFamily: "sans-serif",
+                    fontWeight: "normal",
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 220,
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabel: "{label} ({y})",
+                    yValueFormatString: ("#'%'"),
+                    dataPoints: [{
+                            label: "Reinstalls",
+                            y: 15,
+                            color: "#f6a168"
+                        },
+                        {
+                            label: "Installs",
+                            y: 85,
+                            color: "#a46fff",
+                        },
+                    ]
+                }]
+            };
+            var options1 = {
+                legend: {
+                    horizontalAlign: "right",
+                    verticalAlign: "top",
+                    maxWidth: 110,
+                    fontSize: 18,
+                    fontWeight: "normal",
+                    fontFamily: "sans-serif",
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 180,
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabel: "{label} ({y})",
+                    yValueFormatString: ("#'%'"),
+                    dataPoints: [{
+                            label: "Reinstalls",
+                            y: 25,
+                            color: "#f6a168"
+                        },
+                        {
+                            label: "Installs",
+                            y: 75,
+                            color: "#a46fff",
+                        },
+                    ]
+                }],
+            };
+            var options3 = {
+                animationEnabled: true,
+                axisY: {
+                    valueFormatString: "#0",
+                    includeZero: true,
+                    suffix: "K",
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toogleDataSeries,
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [{
+                    type: "line",
+                    name: "App a",
+                    markerSize: 0,
+                    markerColor: "#a46ffd",
+                    legendMarkerColor: "#a46ffd",
+                    lineColor: "#a46ffd",
+                    showInLegend: true,
+                    yValueFormatString: "#K",
+                    labels: ['Mar/23/2021', ' ', ' ', 'Mar/28/2021', ' ', ' ', ' ', ' ', 'Apr/02/2021',
+                        ' ', ' ', ' ', ' ', ' ', 'Apr/07/2021', ' ',
+                        ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                        'Apr/19/2021'
+                    ],
+                    dataPoints: [{
+                            x: 0,
+                            y: 9.2,
+                            label: "Mar/23/2021"
+                        },
+                        {
+                            x: 1,
+                            y: 8.0,
+                            label: " "
+                        },
+                        {
+                            x: 2,
+                            y: 8.1,
+                            label: "Mar/28/2021"
+                        },
+                        {
+                            x: 4,
+                            y: 9.8,
+                            label: " "
+                        },
+                        {
+                            x: 5,
+                            y: 10.1,
+                            label: " "
+                        },
+                        {
+                            x: 6,
+                            y: 8.1,
+                            label: " "
+                        },
+                        {
+                            x: 7,
+                            y: 7.0,
+                            label: " "
+                        },
+                        {
+                            x: 8,
+                            y: 7.0,
+                            label: "Apr/02/2021"
+                        },
+                        {
+                            x: 9,
+                            y: 9.9,
+                            label: " "
+                        },
+                        {
+                            x: 10,
+                            y: 13.9,
+                            label: " "
+                        },
+                        {
+                            x: 11,
+                            y: 10.3,
+                            label: " "
+                        },
+                        {
+                            x: 12,
+                            y: 11.8,
+                            label: " "
+                        },
+                        {
+                            x: 13,
+                            y: 9.8,
+                            label: " "
+                        },
+                        {
+                            x: 14,
+                            y: 7.5,
+                            label: "Apr/07/2021"
+                        },
+                        {
+                            x: 15,
+                            y: 7.9,
+                            label: " "
+                        },
+                        {
+                            x: 16,
+                            y: 7.4,
+                            label: " "
+                        },
+                        {
+                            x: 17,
+                            y: 9.0,
+                            label: " "
+                        },
+                        {
+                            x: 18,
+                            y: 9.8,
+                            label: " "
+                        },
+                        {
+                            x: 19,
+                            y: 7.1,
+                            label: " "
+                        },
+                        {
+                            x: 20,
+                            y: 6.6,
+                            label: " "
+                        },
+                        {
+                            x: 21,
+                            y: 8.1,
+                            label: " "
+                        },
+                        {
+                            x: 22,
+                            y: 10.1,
+                            label: "Apr/19/2021"
+                        }
+                    ]
+                }, {
+                    type: "line",
+                    name: "App b",
+                    markerType: "circle",
+                    legendMarkerColor: "#f8a16b",
+                    markerSize: 0,
+                    lineColor: "#f8a16b",
+                    markerColor: "#f8a16b",
+                    showInLegend: true,
+                    yValueFormatString: "#K",
+                    dataPoints: [{
+                            x: 0,
+                            y: 3.5,
+                            label: "Mar/23/2021"
+                        },
+                        {
+                            x: 1,
+                            y: 3.4,
+                            label: " "
+                        },
+                        {
+                            x: 2,
+                            y: 3.9,
+                            label: "Mar/28/2021"
+                        },
+                        {
+                            x: 4,
+                            y: 4.5,
+                            label: " "
+                        },
+                        {
+                            x: 5,
+                            y: 4.6,
+                            label: " "
+                        },
+                        {
+                            x: 6,
+                            y: 3.6,
+                            label: " "
+                        },
+                        {
+                            x: 7,
+                            y: 3.3,
+                            label: " "
+                        },
+                        {
+                            x: 8,
+                            y: 1.9,
+                            label: "Apr/02/2021"
+                        },
+                        {
+                            x: 9,
+                            y: 1.8,
+                            label: " "
+                        },
+                        {
+                            x: 10,
+                            y: 4.4,
+                            label: " "
+                        },
+                        {
+                            x: 11,
+                            y: 4.0,
+                            label: " "
+                        },
+                        {
+                            x: 12,
+                            y: 3.9,
+                            label: " "
+                        },
+                        {
+                            x: 13,
+                            y: 4.0,
+                            label: " "
+                        },
+                        {
+                            x: 14,
+                            y: 4.0,
+                            label: "Apr/07/2021"
+                        },
+                        {
+                            x: 15,
+                            y: 3.7,
+                            label: " "
+                        },
+                        {
+                            x: 16,
+                            y: 4.1,
+                            label: " "
+                        },
+                        {
+                            x: 17,
+                            y: 4.8,
+                            label: " "
+                        },
+                        {
+                            x: 18,
+                            y: 3.7,
+                            label: " "
+                        },
+                        {
+                            x: 19,
+                            y: 3.4,
+                            label: " "
+                        },
+                        {
+                            x: 20,
+                            y: 3.6,
+                            label: " "
+                        },
+                        {
+                            x: 21,
+                            y: 4.0,
+                            label: " "
+                        },
+                        {
+                            x: 22,
+                            y: 3.6,
+                            label: "Apr/19/2021"
+                        }
+
+                    ]
+                }]
+            };
+            var options4 = {
+                animationEnabled: true,
+                title: {
+                    text: "[Last 30 Days] Organic vs. Non-orgainic installs",
+                    fontSize: 20,
+                    fontFamily: "tahoma",
+                    fontColor: "black",
+                    fontWeight: "400"
+                },
+                axisY: {
+                    valueFormatString: "#0k",
+                },
+                toolTip: {
+                    shared: true,
+                    reversed: true
+                },
+                data: [{
+                        type: "stackedColumn",
+                        name: "Organic installs",
+                        showInLegend: "true",
+                        legendMarkerType: "circle",
+                        yValueFormatString: "##k",
+                        color: "#a66efc",
+                        dataPoints: [{
+                                y: 10,
+                                label: "Mar/23/2021"
+                            },
+                            {
+                                y: 8,
+                                label: "Mar/23/2021"
+                            },
+                            {
+                                y: 6,
+                                label: "Mar/23/2021"
+                            },
+                            {
+                                y: 7,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 9,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 9,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 6,
+                                label: "Mar/28/2021"
+                            }, {
+                                y: 9,
+                                label: "Mar/28/2021"
+                            }, {
+                                y: 15,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 11,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 13,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 8.5,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 7,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 7.5,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 7.5,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 7,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 8,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 9,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 6.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 6.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 6.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 8,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 9,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 6.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 6,
+                                label: "Apr/20/2021"
+                            }
+                        ]
+                    },
+                    {
+                        type: "stackedColumn",
+                        name: "Non-orgainic installs",
+                        showInLegend: "true",
+                        legendMarkerType: "circle",
+                        color: "#f4a16c",
+                        yValueFormatString: "##k",
+                        dataPoints: [{
+                                y: 12,
+                                label: "Mar/23/2021"
+                            },
+                            {
+                                y: 10,
+                                label: "Mar/23/2021"
+                            },
+                            {
+                                y: 11,
+                                label: "Mar/23/2021"
+                            },
+                            {
+                                y: 12,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 14,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 14,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 11,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 13.5,
+                                label: "Mar/28/2021"
+                            },
+                            {
+                                y: 21,
+                                label: "Apr/04/2021"
+                            },
+                            {
+                                y: 15,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 17,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 13.5,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 11,
+                                label: "Apr/04/2021"
+                            }, {
+                                y: 11.5,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 11.5,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 10.5,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 13,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 14,
+                                label: "Apr/09/2021"
+                            }, {
+                                y: 10,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 9.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 10,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 11.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 13.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 10.5,
+                                label: "Apr/20/2021"
+                            }, {
+                                y: 10.5,
+                                label: "Apr/20/2021"
+                            }
+                        ]
+                    }
+                ]
+            };
+
+
+            function toogleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                e.chart.render();
+            }
+            $("#piechartContainer1").CanvasJSChart(options);
+            $("#piechartContainer2").CanvasJSChart(options1);
+            $("#chartContainer").CanvasJSChart(options2);
+            $("#linechartContainer3").CanvasJSChart(options3);
+            $("#barchartContainer4").CanvasJSChart(options4);
+        };
+    </script>
+</body>
+
+</html>
